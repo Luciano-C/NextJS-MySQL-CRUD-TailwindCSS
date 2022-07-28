@@ -37,7 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 https://www.youtube.com/watch?v=7vBSeFjJCww
 
-Time: 55:51
+Time: 1:49:50
 
 
 ## Make sure mysql is running
