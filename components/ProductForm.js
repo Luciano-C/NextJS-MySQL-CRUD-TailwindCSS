@@ -1,32 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
+
+
 
 export const ProductForm = () => {
+
+    const [product, setProduct] = useState({
+        name: "",
+        description: "",
+        price: 0
+    })
+
+    // Se instancia objeto router de next
+    const router = useRouter();
     
-    const handleSubmit = async(e) => {
+    // De e se toma target y de target se toma name, value => para no escribir e.target.name, e.target.value
+    const handleChange = ({ target: { name, value } }) => {
+        setProduct({ ...product, [name]: value })
+    }
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await axios.post("/api/products", {
-            name: "product 1",
-            description: "some product",
-            price: 10000
-        })
+        const res = await axios.post("/api/products", product)
         console.log(res)
+        router.push("/")
 
     }
-    
+
     return (
-        <div className="bg-gray-300">
-            <form onSubmit={handleSubmit}>
+        <div className="w-full max-w-xs">
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <label htmlFor="name">Name:</label>
-                <input type="text" name="name"/>
+                <input type="text" name="name" onChange={handleChange} className="shadow border rounded py-2 px-3 text-gray-700" />
 
                 <label htmlFor="price">Price:</label>
-                <input type="text" name="price" id="price"/>
+                <input type="text" name="price" id="price" onChange={handleChange} className="shadow border rounded py-2 px-3 text-gray-700" />
 
                 <label htmlFor="description">Description:</label>
-                <textarea name="description" rows="2"></textarea>
+                <textarea name="description" rows="2" onChange={handleChange} className="shadow border rounded py-2 px-3 text-gray-700"></textarea>
 
-                <button>Save Product</button>
+                <button className="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded focus:outline-none focus:shadow-outline font-bold text-white">Save Product</button>
             </form>
         </div>
     )
