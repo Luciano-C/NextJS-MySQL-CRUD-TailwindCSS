@@ -18,24 +18,35 @@ export default async function handler(req, res) {
 
 
 const getProduct = async (req, res) => {
-    const { id } = req.query;
-    const [result] = await pool.query("SELECT * FROM product WHERE id = ?", [id]);
-    // Result es un arreglo, con 1 objeto. Por lo que se devolverá al cliente result[0]
-    console.log(result);
-    return res.status(200).json(result[0]);
+    try {
+        const { id } = req.query;
+        const [result] = await pool.query("SELECT * FROM product WHERE id = ?", [id]);
+        // Result es un arreglo, con 1 objeto. Por lo que se devolverá al cliente result[0]
+        return res.status(200).json(result[0]);
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 }
 
 const deleteProduct = async (req, res) => {
-    const { id } = req.query;
-    const result = await pool.query("DELETE FROM product WHERE id = ?", [id]);
-    // Respuesta 204 no retorna un objecto, por lo que acepta un json vacío.
-    return res.status(204).json();
+    try {
+        const { id } = req.query;
+        const result = await pool.query("DELETE FROM product WHERE id = ?", [id]);
+        // Respuesta 204 no retorna un objecto, por lo que acepta un json vacío.
+        return res.status(204).json();
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
 }
 
 const updateProduct = async (req, res) => {
-    const { id } = req.query;
-    const result = await pool.query("UPDATE product SET ? WHERE id = ?", [req.body, id]);
-    return res.status(204).json();
+    try {
+        const { id } = req.query;
+        const result = await pool.query("UPDATE product SET ? WHERE id = ?", [req.body, id]);
+        return res.status(204).json();
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
 }
 
 

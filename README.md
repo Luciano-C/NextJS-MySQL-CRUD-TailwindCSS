@@ -1,8 +1,21 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Tutorial
+
+https://www.youtube.com/watch?v=7vBSeFjJCww
+
+
 ## Getting Started
 
-First, run the development server:
+## A .env file is needed with the following:
+HOST=<em>your_host</em>
+USER=<em>your_username</em>
+DB_PASSWORD=<em>your_password</em>
+
+## Make sure mysql is running
+$ mysql -u <em>your_username</em> -p<em>your_password</em>
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -33,12 +46,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Tutorial
-
-https://www.youtube.com/watch?v=7vBSeFjJCww
-
-Time: 1:49:50
 
 
-## Make sure mysql is running
-$ mysql -u <em>your_username</em> -p<em>your_password</em>
+
+
+
+

@@ -3,16 +3,21 @@ import React from "react";
 import { Layout } from "../../components/Layout"
 import { useRouter } from "next/router";
 
+import { toast } from "react-toastify"
+
 
 const ProductPage = ({ product }) => {
 
     const router = useRouter();
 
     const handleDelete = async (id) => {
-        console.log(id);
+       try {
         // No es necesario escribir toda la dirección acá porque estamos en el front end
         await axios.delete("/api/products/" + id);
-        router.push("/")
+        router.push("/");
+       } catch (error) {
+        toast.error(error.response.data.message);
+       }
     }
 
 
